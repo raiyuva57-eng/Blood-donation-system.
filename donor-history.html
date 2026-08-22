@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donor History — LifeDrop</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C12 2 5 10.5 5 15a7 7 0 0 0 14 0c0-4.5-7-13-7-13z" fill="#c41e3a" stroke="#c41e3a"/></svg>
+      LifeDrop
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="community.html">Community</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="nav-link" href="donor-history.html">Donor History</a>
+      <a class="nav-link" href="patient.html">Patients</a>
+      <a class="nav-link" href="admin.html">Admin</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <span id="navAuth"><a href="login.html" class="btn btn-outline btn-sm">Sign in</a></span>
+  </div>
+</header>
+
+<main class="wrap section">
+  <div class="flex-between" style="margin-bottom: 8px;">
+    <div>
+      <div class="hero-eyebrow">Donation record</div>
+      <h1 style="font-size: 34px;">Donor history</h1>
+    </div>
+    <button class="btn btn-primary" id="toggleFormBtn">+ Log a donation</button>
+  </div>
+  <p class="hero-sub">Every recorded donation — who gave, when, where, and how much.</p>
+
+  <div class="card section-tight" id="formCard" style="display: none;">
+    <h3>New donation record</h3>
+    <div id="formBanner"></div>
+    <form id="donorForm" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="donorName">Donor name</label>
+          <input type="text" id="donorName" required placeholder="Asha Menon">
+        </div>
+        <div class="field">
+          <label for="bloodType">Blood type</label>
+          <select id="bloodType" required>
+            <option value="">Select…</option>
+            <option>O+</option><option>O-</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="donationDate">Donation date</label>
+          <input type="date" id="donationDate" required>
+        </div>
+        <div class="field">
+          <label for="units">Units donated</label>
+          <input type="number" id="units" min="1" max="4" value="1" required>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="location">Location</label>
+          <input type="text" id="location" placeholder="Springfield Community Center">
+        </div>
+        <div class="field">
+          <label for="donorPhone">Donor phone number</label>
+          <input type="tel" id="donorPhone" placeholder="(555) 123-4567" pattern="[0-9\-\+\(\)\s]{7,20}">
+        </div>
+      </div>
+      <div class="field">
+        <label for="photo">Donor photo (optional)</label>
+        <input type="file" id="photo" accept="image/*">
+        <div class="field-hint">Stored only in this browser — never uploaded anywhere.</div>
+        <img id="photoPreview" style="display:none; margin-top: 10px; width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid var(--line-strong);">
+      </div>
+      <div class="field">
+        <label for="notes">Notes (optional)</label>
+        <textarea id="notes" rows="2" placeholder="Any relevant notes…"></textarea>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button type="submit" class="btn btn-primary">Save record</button>
+        <button type="button" class="btn btn-ghost" id="cancelFormBtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card section-tight">
+    <div class="flex-between" style="margin-bottom: 4px;">
+      <h3 style="margin: 0;">All records</h3>
+      <input type="search" id="searchBox" placeholder="Search by name or blood type…" style="max-width: 260px; padding: 9px 12px; border: 1.5px solid var(--line-strong); border-radius: 8px; font-family: var(--font-body); font-size: 14px;">
+    </div>
+    <div id="donorList"></div>
+  </div>
+</main>
+
+<footer class="footer wrap">
+  <span>© 2026 LifeDrop. A community blood donation network.</span>
+  <span><a href="patient.html">Register a patient</a></span>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/chatbot-data.js"></script>
+<script src="js/chatbot-widget.js"></script>
+<script>
+  (function() {
+    const session = LifeDropAuth.getSession();
+    const slot = document.getElementById('navAuth');
+    if (session && slot) {
+      slot.innerHTML = '<span style="font-size:13px;color:var(--clay);margin-right:8px;">' + session.fullName.split(' ')[0] + '</span><button class="btn btn-ghost btn-sm" onclick="LifeDropAuth.logout(); window.location.reload();">Sign out</button>';
+    }
+  })();
+</script>
+<script>
+  const formCard = document.getElementById('formCard');
+  const toggleFormBtn = document.getElementById('toggleFormBtn');
+  const cancelFormBtn = document.getElementById('cancelFormBtn');
+  const form = document.getElementById('donorForm');
+  const banner = document.getElementById('formBanner');
+  const searchBox = document.getElementById('searchBox');
+  const photoInput = document.getElementById('photo');
+  const photoPreview = document.getElementById('photoPreview');
+
+  let photoDataUrl = null;
+
+  toggleFormBtn.addEventListener('click', () => {
+    formCard.style.display = formCard.style.display === 'none' ? 'block' : 'none';
+  });
+  cancelFormBtn.addEventListener('click', () => {
+    formCard.style.display = 'none';
+    form.reset();
+    photoDataUrl = null;
+    photoPreview.style.display = 'none';
+  });
+
+  photoInput.addEventListener('change', () => {
+    const file = photoInput.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      banner.innerHTML = `<div class="form-banner error">Please choose an image file.</div>`;
+      photoInput.value = '';
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      banner.innerHTML = `<div class="form-banner error">Image is too large — please choose one under 2MB.</div>`;
+      photoInput.value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      photoDataUrl = e.target.result;
+      photoPreview.src = photoDataUrl;
+      photoPreview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const record = {
+      name: document.getElementById('donorName').value.trim(),
+      bloodType: document.getElementById('bloodType').value,
+      date: document.getElementById('donationDate').value,
+      units: Number(document.getElementById('units').value),
+      location: document.getElementById('location').value.trim(),
+      phone: document.getElementById('donorPhone').value.trim(),
+      notes: document.getElementById('notes').value.trim(),
+      photo: photoDataUrl,
+    };
+    LifeDropData.addDonorRecord(record);
+    banner.innerHTML = `<div class="form-banner success">Donation record saved.</div>`;
+    form.reset();
+    photoDataUrl = null;
+    photoPreview.style.display = 'none';
+    renderList();
+    setTimeout(() => { formCard.style.display = 'none'; banner.innerHTML = ''; }, 900);
+  });
+
+  function avatarOrInitial(record) {
+    if (record.photo) {
+      return `<img src="${record.photo}" alt="${escapeHtml(record.name)}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;">`;
+    }
+    const initial = (record.name || '?').trim().charAt(0).toUpperCase();
+    return `<div style="width:40px;height:40px;border-radius:50%;background:var(--sage-wash);color:var(--sage);display:flex;align-items:center;justify-content:center;font-weight:600;font-family:var(--font-display);">${initial}</div>`;
+  }
+
+  function renderList() {
+    const query = searchBox.value.trim().toLowerCase();
+    let donors = LifeDropData.getDonors();
+    if (query) {
+      donors = donors.filter((d) =>
+        (d.name || '').toLowerCase().includes(query) ||
+        (d.bloodType || '').toLowerCase().includes(query)
+      );
+    }
+
+    const list = document.getElementById('donorList');
+    if (!donors.length) {
+      list.innerHTML = `<div class="empty-state"><h3>No records found</h3><p>Log a donation to see it appear here.</p></div>`;
+      return;
+    }
+
+    list.innerHTML = `
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Name</th><th>Type</th><th>Date</th><th>Units</th><th>Location</th><th>Phone</th><th></th></tr></thead>
+          <tbody>
+            ${donors.map((d) => `
+              <tr>
+                <td>${avatarOrInitial(d)}</td>
+                <td>${escapeHtml(d.name)}</td>
+                <td>${bloodTypeBadge(d.bloodType)}</td>
+                <td>${formatDate(d.date)}</td>
+                <td>${d.units ?? 1}</td>
+                <td>${escapeHtml(d.location || '—')}</td>
+                <td class="mono" style="font-size:13px;">${escapeHtml(d.phone || '—')}</td>
+                <td><button class="btn btn-ghost btn-sm" onclick="removeDonor('${d.id}')">Remove</button></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  function removeDonor(id) {
+    if (!confirm('Remove this donation record?')) return;
+    LifeDropData.deleteDonorRecord(id);
+    renderList();
+  }
+
+  searchBox.addEventListener('input', renderList);
+  document.getElementById('donationDate').valueAsDate = new Date();
+  renderList();
+</script>
+<script>
+  const themeToggleBtn = document.getElementById('themeToggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => LifeDropTheme.toggle());
+  }
+</script>
+</body>
+</html>

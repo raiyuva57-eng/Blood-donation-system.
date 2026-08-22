@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeDrop — Community Blood Donation Network</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C12 2 5 10.5 5 15a7 7 0 0 0 14 0c0-4.5-7-13-7-13z" fill="#c41e3a" stroke="#c41e3a"/></svg>
+      LifeDrop
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="community.html">Community</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+      <a class="nav-link" href="donor-history.html">Donor History</a>
+      <a class="nav-link" href="patient.html">Patients</a>
+      <a class="nav-link" href="admin.html">Admin</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <span id="navAuth"><a href="login.html" class="btn btn-outline btn-sm">Sign in</a></span>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="hero-eyebrow reveal">Every 2 seconds, someone needs blood</div>
+    <h1 class="reveal reveal-1">One donation.<br>Up to three lives.</h1>
+    <p class="hero-sub reveal reveal-2">LifeDrop connects donors, patients, and blood banks in one place — track your donation history, register a patient's need, and find the nearest place to give.</p>
+
+    <div class="reveal reveal-3" style="display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap;">
+      <a href="donor-history.html" class="btn btn-primary">Log a donation</a>
+      <a href="patient.html" class="btn btn-outline">Register a patient need</a>
+    </div>
+
+    <svg class="heartbeat" viewBox="0 0 800 64" preserveAspectRatio="none" aria-hidden="true">
+      <path class="heartbeat-track" d="M0,32 L160,32 L185,32 L200,10 L218,58 L235,20 L250,32 L400,32 L420,32 L438,14 L456,50 L472,32 L800,32" />
+      <path class="heartbeat-pulse" d="M0,32 L160,32 L185,32 L200,10 L218,58 L235,20 L250,32 L400,32 L420,32 L438,14 L456,50 L472,32 L800,32" />
+    </svg>
+  </section>
+
+  <section class="wrap section-tight">
+    <div class="grid-3">
+      <div class="card hoverable reveal reveal-1">
+        <div class="bt-badge" style="margin-bottom: 14px;">O−</div>
+        <h3 style="font-size: 18px;">Universal donor</h3>
+        <p style="font-size: 14.5px;">O-negative blood can be given to patients of any blood type in an emergency — which is why it's always in short supply.</p>
+      </div>
+      <div class="card hoverable reveal reveal-2">
+        <div class="bt-badge" style="margin-bottom: 14px;">AB+</div>
+        <h3 style="font-size: 18px;">Universal recipient</h3>
+        <p style="font-size: 14.5px;">Patients with AB-positive blood can safely receive donations from any blood type, making them the universal recipient.</p>
+      </div>
+      <div class="card hoverable reveal reveal-3">
+        <div class="bt-badge" style="margin-bottom: 14px;">56d</div>
+        <h3 style="font-size: 18px;">Recovery window</h3>
+        <p style="font-size: 14.5px;">Most donors can safely give whole blood again after about 8 weeks — your body fully replenishes red cells in that time.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="wrap section">
+    <div class="card reveal" style="background: var(--ink); color: var(--paper); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 36px 32px;">
+      <div>
+        <h2 style="color: var(--paper); font-size: 26px; margin-bottom: 6px;">Know someone who needs blood?</h2>
+        <p style="color: var(--paper); opacity: 0.85; margin: 0;">Register their need and we'll help match nearby donors by blood type.</p>
+      </div>
+      <a href="patient.html" class="btn btn-primary">Register a patient</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer wrap">
+  <span>© 2026 LifeDrop. A community blood donation network.</span>
+  <span><a href="contact.html">Contact us</a> · <a href="about.html">About</a></span>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/chatbot-data.js"></script>
+<script src="js/chatbot-widget.js"></script>
+<script>
+  (function() {
+    const session = LifeDropAuth.getSession();
+    const slot = document.getElementById('navAuth');
+    if (session && slot) {
+      slot.innerHTML = '<span style="font-size:13px;color:var(--clay);margin-right:8px;">' + session.fullName.split(' ')[0] + '</span><button class="btn btn-ghost btn-sm" onclick="LifeDropAuth.logout(); window.location.reload();">Sign out</button>';
+    }
+  })();
+</script>
+<script>
+  const themeToggleBtn = document.getElementById('themeToggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => LifeDropTheme.toggle());
+  }
+</script>
+</body>
+</html>
