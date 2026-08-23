@@ -41,3 +41,6 @@ const notFound = (req, res, next) => {
 };
 
 module.exports = { errorHandler, notFound };
+const errorHandler = require('./middleware/errorHandler');
+// or
+import errorHandler from './middleware/errorHandler';
