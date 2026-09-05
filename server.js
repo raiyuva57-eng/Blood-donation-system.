@@ -13,4 +13,12 @@ const startServer = async () => {
   });
 };
 
+process.on('unhandledRejection', (error) => {
+  console.error('Unhandled promise rejection:', error.message);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught exception:', error.message);
+});
+
 startServer();

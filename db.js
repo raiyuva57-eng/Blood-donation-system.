@@ -18,9 +18,10 @@ const testConnection = async () => {
     const connection = await pool.getConnection();
     console.log('✅ MySQL Database connected successfully');
     connection.release();
+    return true;
   } catch (error) {
-    console.error('❌ MySQL Database connection failed:', error.message);
-    process.exit(1);
+    console.warn('⚠️ MySQL Database unavailable:', error.message);
+    return false;
   }
 };
 
