@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
-const { pool } = require('../config/db');
-const excelService = require('../services/excelService');
-const asyncHandler = require('../utils/asyncHandler');
+const bcrypt = require('bcryptjs');
+const { pool } = require('./db');
+const excelService = require('./excelService');
+const asyncHandler = require('./asyncHandler');
 
 const VALID_BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
@@ -200,7 +200,7 @@ async function exportDonors(res) {
      FROM donors d JOIN users u ON d.user_id = u.user_id ORDER BY u.full_name`
   );
 
-  const workbook = await require('../services/excelService').buildWorkbook({
+  const workbook = await require('./excelService').buildWorkbook({
     sheetName: 'Donors',
     columns: [
       { header: 'Full Name', key: 'full_name', width: 22 },
@@ -218,7 +218,7 @@ async function exportDonors(res) {
     rows
   });
 
-  await require('../services/excelService').sendWorkbook(res, workbook, `donors_export_${Date.now()}.xlsx`);
+  await require('./excelService').sendWorkbook(res, workbook, `donors_export_${Date.now()}.xlsx`);
 }
 
 async function exportPatients(res) {
@@ -227,7 +227,7 @@ async function exportPatients(res) {
      FROM patients p JOIN users u ON p.user_id = u.user_id ORDER BY u.full_name`
   );
 
-  const workbook = await require('../services/excelService').buildWorkbook({
+  const workbook = await require('./excelService').buildWorkbook({
     sheetName: 'Patients',
     columns: [
       { header: 'Full Name', key: 'full_name', width: 22 },
@@ -241,7 +241,7 @@ async function exportPatients(res) {
     rows
   });
 
-  await require('../services/excelService').sendWorkbook(res, workbook, `patients_export_${Date.now()}.xlsx`);
+  await require('./excelService').sendWorkbook(res, workbook, `patients_export_${Date.now()}.xlsx`);
 }
 
 async function exportRequests(res) {
@@ -254,7 +254,7 @@ async function exportRequests(res) {
      ORDER BY br.created_at DESC`
   );
 
-  const workbook = await require('../services/excelService').buildWorkbook({
+  const workbook = await require('./excelService').buildWorkbook({
     sheetName: 'Blood Requests',
     columns: [
       { header: 'Request ID', key: 'request_id', width: 12 },
@@ -269,7 +269,7 @@ async function exportRequests(res) {
     rows
   });
 
-  await require('../services/excelService').sendWorkbook(res, workbook, `requests_export_${Date.now()}.xlsx`);
+  await require('./excelService').sendWorkbook(res, workbook, `requests_export_${Date.now()}.xlsx`);
 }
 
 async function exportStock(res) {
@@ -280,7 +280,7 @@ async function exportStock(res) {
      ORDER BY bb.bank_name, bs.blood_group`
   );
 
-  const workbook = await require('../services/excelService').buildWorkbook({
+  const workbook = await require('./excelService').buildWorkbook({
     sheetName: 'Blood Stock',
     columns: [
       { header: 'Blood Bank', key: 'bank_name', width: 24 },
@@ -295,7 +295,7 @@ async function exportStock(res) {
     rows
   });
 
-  await require('../services/excelService').sendWorkbook(res, workbook, `stock_export_${Date.now()}.xlsx`);
+  await require('./excelService').sendWorkbook(res, workbook, `stock_export_${Date.now()}.xlsx`);
 }
 
 async function exportDonations(res) {
@@ -308,7 +308,7 @@ async function exportDonations(res) {
      ORDER BY dh.donation_date DESC`
   );
 
-  const workbook = await require('../services/excelService').buildWorkbook({
+  const workbook = await require('./excelService').buildWorkbook({
     sheetName: 'Donation History',
     columns: [
       { header: 'Donation ID', key: 'donation_id', width: 14 },
@@ -322,7 +322,7 @@ async function exportDonations(res) {
     rows
   });
 
-  await require('../services/excelService').sendWorkbook(res, workbook, `donations_export_${Date.now()}.xlsx`);
+  await require('./excelService').sendWorkbook(res, workbook, `donations_export_${Date.now()}.xlsx`);
 }
 
 module.exports = { importExcel, exportExcel };

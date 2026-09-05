@@ -2,10 +2,10 @@ const express = require('express');
 const { body } = require('express-validator');
 const router = express.Router();
 
-const { register, login, getProfile, updateProfile, changePassword } = require('../controllers/authController');
-const { protect } = require('../middleware/authMiddleware');
-const { authLimiter } = require('../middleware/rateLimiter');
-const validateRequest = require('../middleware/validateRequest');
+const { register, login, getProfile, updateProfile, changePassword } = require('./authController');
+const { protect } = require('./authMiddleware');
+const { authLimiter } = require('./rateLimiter');
+const validateRequest = require('./validateRequest');
 
 const registerValidation = [
   body('full_name').trim().notEmpty().withMessage('Full name is required'),

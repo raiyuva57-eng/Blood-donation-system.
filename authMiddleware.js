@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const jwtConfig = require('../config/jwt');
-const User = require('../models/User');
-const asyncHandler = require('../utils/asyncHandler');
+const jwtConfig = require('./jwt');
+const User = require('./User');
+const asyncHandler = require('./asyncHandler');
 
 // Verifies JWT and attaches the authenticated user to req.user
 const protect = asyncHandler(async (req, res, next) => {

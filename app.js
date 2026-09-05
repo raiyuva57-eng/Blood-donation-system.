@@ -4,8 +4,8 @@ const helmet = require('helmet');
 const path = require('path');
 require('dotenv').config();
 
-const { errorHandler, notFound } = require('./middleware/errorHandler');
-const { generalLimiter } = require('./middleware/rateLimiter');
+const { errorHandler, notFound } = require('./errorhandler');
+const { generalLimiter } = require('./rateLimiter');
 
 const app = express();
 
@@ -28,14 +28,14 @@ app.get('/api/health', (req, res) => {
 });
 
 // ---- Routes ----
-app.use('/api', require('./routes/authRoutes'));
-app.use('/api/donors', require('./routes/donorRoutes'));
-app.use('/api/hospitals', require('./routes/hospitalRoutes'));
-app.use('/api/patients', require('./routes/patientRoutes'));
-app.use('/api/requests', require('./routes/requestRoutes'));
-app.use('/api/stock', require('./routes/stockRoutes'));
-app.use('/api/dashboard', require('./routes/dashboardRoutes'));
-app.use('/api', require('./routes/excelRoutes'));
+app.use('/api', require('./authRoutes'));
+app.use('/api/donors', require('./donorRoutes'));
+app.use('/api/hospitals', require('./hospitalRoutes'));
+app.use('/api/patients', require('./patientRoutes'));
+app.use('/api/requests', require('./requestRoutes'));
+app.use('/api/stock', require('./stockRoutes'));
+app.use('/api/dashboard', require('./dashboardRoutes'));
+app.use('/api', require('./excelRoutes'));
 
 // ---- 404 + error handling (must be last) ----
 app.use(notFound);

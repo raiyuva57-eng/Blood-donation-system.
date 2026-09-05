@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getPatients, getPatientById, createPatient, updatePatient, deletePatient } = require('../controllers/patientController');
-const { protect } = require('../middleware/authMiddleware');
-const { authorize } = require('../middleware/roleMiddleware');
+const { getPatients, getPatientById, createPatient, updatePatient, deletePatient } = require('./patientController');
+const { protect } = require('./authMiddleware');
+const { authorize } = require('./roleMiddleware');
 
 router.get('/', protect, authorize('admin', 'hospital'), getPatients);
 router.get('/:id', protect, getPatientById);

@@ -1,4 +1,4 @@
-const { pool } = require('../config/db');
+const { pool } = require('./db');
 
 const User = {
   // Create a new user

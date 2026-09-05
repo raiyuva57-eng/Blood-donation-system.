@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getStock, createStock, updateStock, deleteStock } = require('../controllers/stockController');
-const { protect } = require('../middleware/authMiddleware');
-const { authorize } = require('../middleware/roleMiddleware');
+const { getStock, createStock, updateStock, deleteStock } = require('./stockController');
+const { protect } = require('./authMiddleware');
+const { authorize } = require('./roleMiddleware');
 
 router.get('/', getStock); // public - patients need to search availability
 router.post('/', protect, authorize('admin', 'hospital'), createStock);

@@ -1,11 +1,11 @@
-const bcrypt = require('bcrypt');
-const User = require('../models/User');
-const Donor = require('../models/Donor');
-const Patient = require('../models/Patient');
-const Hospital = require('../models/Hospital');
-const generateToken = require('../utils/generateToken');
-const asyncHandler = require('../utils/asyncHandler');
-const { pool } = require('../config/db');
+const bcrypt = require('bcryptjs');
+const User = require('./User');
+const Donor = require('./Donor');
+const Patient = require('./Patient');
+const Hospital = require('./Hospital');
+const generateToken = require('./generateToken');
+const asyncHandler = require('./asyncHandler');
+const { pool } = require('./db');
 
 // @route  POST /api/register
 // @access Public

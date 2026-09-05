@@ -1,5 +1,5 @@
-const { pool } = require('../config/db');
-const asyncHandler = require('../utils/asyncHandler');
+const { pool } = require('./db');
+const asyncHandler = require('./asyncHandler');
 
 // @route  GET /api/dashboard/stats
 // @access Private (admin sees global stats; hospital sees scoped stats)
