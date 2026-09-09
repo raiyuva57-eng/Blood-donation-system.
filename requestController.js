@@ -1,6 +1,6 @@
-const { pool } = require('../config/db');
-const BloodRequest = require('../models/BloodRequest');
-const asyncHandler = require('../utils/asyncHandler');
+const { pool } = require('./db');
+const BloodRequest = require('./BloodRequest');
+const asyncHandler = require('./asyncHandler');
 
 // @route  GET /api/requests
 // @access Private (role-aware: admin/hospital see all, donor/patient see their own)
