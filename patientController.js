@@ -1,5 +1,5 @@
-const { pool } = require('../config/db');
-const asyncHandler = require('../utils/asyncHandler');
+const { pool } = require('./db');
+const asyncHandler = require('./asyncHandler');
 
 // @route  GET /api/patients
 // @access Private (admin, hospital)
@@ -96,3 +96,4 @@ const deletePatient = asyncHandler(async (req, res) => {
 });
 
 module.exports = { getPatients, getPatientById, createPatient, updatePatient, deletePatient };
+ 
