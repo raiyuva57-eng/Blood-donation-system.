@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getRequests, getRequestById, createRequest, updateRequest, deleteRequest } = require('../controllers/requestController');
-const { protect } = require('../middleware/authMiddleware');
-const { authorize } = require('../middleware/roleMiddleware');
+const { getRequests, getRequestById, createRequest, updateRequest, deleteRequest } = require('./requestController');
+const { protect } = require('./authMiddleware');
+const { authorize } = require('./roleMiddleware');
 
 router.get('/', protect, getRequests);
 router.get('/:id', protect, getRequestById);
