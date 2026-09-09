@@ -1,5 +1,5 @@
-const { pool } = require('../config/db');
-const asyncHandler = require('../utils/asyncHandler');
+const { pool } = require('./db');
+const asyncHandler = require('./asyncHandler');
 
 // @route  GET /api/hospitals
 // @access Private (admin)
