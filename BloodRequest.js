@@ -1,4 +1,4 @@
-const { pool } = require('../config/db');
+const { pool } = require('./db');
 
 const BloodRequest = {
   create: async ({ patient_id, blood_group, units_required, urgency, required_by_date, notes, hospital_id, blood_bank_id }) => {
