@@ -8,9 +8,9 @@ const {
   getRequestsChart,
   getUserRegistrations,
   getRecentActivity
-} = require('../controllers/dashboardController');
-const { protect } = require('../middleware/authMiddleware');
-const { authorize } = require('../middleware/roleMiddleware');
+} = require('./dashboardController');
+const { protect } = require('./authMiddleware');
+const { authorize } = require('./roleMiddleware');
 
 router.get('/stats', protect, authorize('admin', 'hospital'), getStats);
 router.get('/charts/monthly-donations', protect, authorize('admin'), getMonthlyDonations);
