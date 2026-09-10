@@ -1,5 +1,5 @@
-const BloodStock = require('../models/BloodStock');
-const asyncHandler = require('../utils/asyncHandler');
+const BloodStock = require('./BloodStock');
+const asyncHandler = require('./asyncHandler');
 
 // @route  GET /api/stock
 // @access Public (patients need to search blood availability)
