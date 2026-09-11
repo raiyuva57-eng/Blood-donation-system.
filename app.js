@@ -21,7 +21,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(generalLimiter);
 
-// ---- Static files (uploaded photos, certificates) ----
+// ---- Static files (HTML, CSS, JS, uploaded photos, certificates) ----
+app.use(express.static(path.join(__dirname)));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ---- Health check ----
@@ -38,6 +39,11 @@ app.use('/api/requests', require('./requestRoutes'));
 app.use('/api/stock', require('./stockRoutes'));
 app.use('/api/dashboard', require('./dashboardRoutes'));
 app.use('/api', require('./excelRoutes'));
+
+// ---- Serve index.html for the homepage ----
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // ---- 404 + error handling (must be last) ----
 app.use(notFound);
